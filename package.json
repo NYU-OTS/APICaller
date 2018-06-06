@@ -18,6 +18,8 @@
     "url": "https://github.com/chunliu/typescript-react-hot-reload"
   },
   "dependencies": {
+    "@material-ui/core": "^1.2.0",
+    "@material-ui/icons": "^1.1.0",
     "@types/node": "10.1.4",
     "@types/react": "16.3.14",
     "@types/react-dom": "16.0.5",
@@ -33,6 +35,7 @@
     "react-router-config": "1.0.0-beta.4",
     "react-router-dom": "4.2.2",
     "redux": "3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
