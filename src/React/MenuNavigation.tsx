@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Paper, Tab, Tabs, Typography, withStyles } from '@material-ui/core';
 
 import Integration from './Integration';
+import Subreddit from './Subreddit';
 
 const styles: any = {
     root: {
@@ -15,31 +16,27 @@ const styles: any = {
     }
 };
 
-interface TabProps {
-    children: any
+interface MenuProps { 
+    classes: any,
 }
-
-function TabContainer(props: TabProps) {
-    return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    )
+interface MenuState { 
+    value: string, 
+    APIs: { [index: string]: { component: JSX.Element } } 
 }
-
-
-interface MenuProps {
-    classes: any
-}
-
-interface MenuState {
-    value: string
-}
-
 class _MenuNavigation extends React.Component<MenuProps, MenuState> {
     constructor(props: MenuProps) {
         super(props);
-        this.state = { value: 'subreddit' };
+        this.state = { 
+            value: 'subreddit',
+            APIs: {
+                'integration': {
+                    component: <Integration />,
+                },
+                'subreddit': {
+                    component: <Subreddit />,
+                }
+            }
+         };
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -50,8 +47,7 @@ class _MenuNavigation extends React.Component<MenuProps, MenuState> {
 
     render() {
         const { classes } = this.props;
-        const { value } = this.state;
-
+        const { value, APIs } = this.state;
 
         return (
             <Paper className={classes.root}>
@@ -64,40 +60,15 @@ class _MenuNavigation extends React.Component<MenuProps, MenuState> {
                     <Tab value="subreddit" label="Subreddit" />
                     <Tab value="integration" label="Integration" />
                 </Tabs>
-                {value === "subreddit" && <TabContainer>Subreddit!!!</TabContainer>}
-                {value === "integration" && <Integration />}
+                {APIs[value].component}
             </Paper>
         );
     }
 }
 
-/*
-    <BrowserRouter>
-                <Paper className={this.props.classes.menu}>
-                    <MenuList>
-                        <MenuItem>Home</MenuItem>
-                        <MenuItem>Subreddit</MenuItem>
-                        <MenuItem>Integration</MenuItem>
-                    </MenuList>
-                </Paper>
-
-
-                
-
-            </BrowserRouter>
-    <Grid container item xs={7} justify="center">
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/subreddit" component={Subreddit} />
-            <Route exact path="/integration" component={Integration} />
-        </Switch>
-    </Grid>
-    
-    */
-
 const MenuNavigation = connect(
     (state:any) => ({}),
-    dispatch => ({})
+    (dispatch: (action: any) => void)  => ({})
 )(_MenuNavigation);
 
 export default withStyles(styles)(MenuNavigation);

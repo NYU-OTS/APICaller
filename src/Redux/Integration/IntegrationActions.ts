@@ -2,7 +2,16 @@ import fetch from 'cross-fetch';
 
 import keys from '../Base/ActionTypeKeys';
 
-const integrationAPI = 'integration.api.otss.admin.nyu.edu/cpacsweb/v1/projects/';
+const integrationServer = 'http://localhost:3000/projects';
+
+export interface Project {
+    id: string,
+    name: string,
+    client: {
+        dept: string,
+        name: string
+    }
+}
 
 function integrationRequest() {
     return {
@@ -27,12 +36,14 @@ export function integrationFetch() {
     return (dispatch: any) => {
         dispatch(integrationRequest());
 
-        return fetch(integrationAPI)
-        .then(response => {
+        return fetch(integrationServer, {
+            mode: 'no-cors'
+        })
+        .then((response: any) => {
             if (response.status >= 400) {
                 dispatch(integrationInvalidate());
                 throw new Error("Bad response from server");
-            }
+            }            
             return response.json();
         })
         .then(json => dispatch(integrationReceive(json)));

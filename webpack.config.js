@@ -42,7 +42,7 @@ module.exports = {
         // match the output path
         publicPath: '/',
         // match the output `publicPath`
-        open: true
+        //open: true
     },
     module: {
         rules: [
