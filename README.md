@@ -28,9 +28,9 @@ Project will open a new tab in the default browser
 
 ## Built With
 
-* [Node]
-* [React]
-* [Material-UI]
-* [Redux]
-* [TypeScript]
-* [Webpack]
+* [Node.js](https://nodejs.org/en/)
+* [React](https://reactjs.org/)
+* [Material-UI](https://material-ui.com/)
+* [Redux](https://redux.js.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Webpack](https://webpack.js.org/)
